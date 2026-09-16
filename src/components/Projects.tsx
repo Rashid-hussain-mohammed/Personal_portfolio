@@ -1,0 +1,216 @@
+function ExternalIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <path d="M7 17L17 7M17 7H9M17 7V15" />
+    </svg>
+  );
+}
+
+function ProjectCard({
+  href,
+  title,
+  stack,
+  description,
+  visual,
+}: {
+  href: string;
+  title: string;
+  stack: string;
+  description: React.ReactNode;
+  visual: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block border-4 border-ink bg-paper-raised p-6 transition-transform hover:-translate-y-1 hover:shadow-[6px_6px_0_var(--ink)] md:p-8"
+    >
+      <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[1fr_1.1fr]">
+        <div>
+          <div className="flex items-center justify-between gap-3">
+            <h3 className="font-display text-2xl font-semibold text-ink">
+              {title}
+            </h3>
+            <span className="flex shrink-0 items-center gap-1 font-data text-xs font-bold text-signal">
+              GitHub
+              <ExternalIcon />
+            </span>
+          </div>
+          <p className="mt-1 font-data text-xs text-muted">{stack}</p>
+          <div className="mt-3 max-w-lg font-body text-sm leading-relaxed text-ink/75">
+            {description}
+          </div>
+        </div>
+        {visual}
+      </div>
+    </a>
+  );
+}
+
+export default function Projects() {
+  return (
+    <section id="projects" className="border-b-4 border-ink bg-stone">
+      <div className="mx-auto max-w-5xl px-6 py-20 md:px-10">
+        <h2 className="font-display text-3xl font-semibold text-ink md:text-4xl">
+          Selected work
+        </h2>
+
+        <div className="mt-12 space-y-8">
+          <ProjectCard
+            href="https://github.com/Rashid-hussain-mohammed/Agentic-RAG-Proof-of-Concept"
+            title="Agentic RAG system"
+            stack="LangGraph · FastAPI · Ollama · ChromaDB · React/TypeScript"
+            description={
+              <p>
+                A self-correcting agentic RAG system built with LangGraph.
+                Retrieved context is judged for relevance before generation,
+                with automatic query rewriting and a bounded retry loop
+                instead of a single-shot pipeline. Runs fully offline, with
+                grounded refusal instead of hallucination when no relevant
+                context exists — shipped with a custom evaluation harness,
+                pytest, GitHub Actions CI/CD, and Docker.
+              </p>
+            }
+            visual={<RagVisual />}
+          />
+
+          <ProjectCard
+            href="https://github.com/Rashid-hussain-mohammed/Way2home_team5"
+            title="Way2Home"
+            stack="Node.js · React · MySQL · Azure · GitHub Actions"
+            description={
+              <p>
+                A rental platform connecting students and landlords, built by
+                a 7-person agile team across roughly 20 scoped functional
+                requirements and deployed on an Azure VM with GitHub Actions
+                CI/CD. Served as GitHub Master — defining branching and
+                commit conventions and enforcing PR review policy — and
+                built the Save Search feature end-to-end.
+              </p>
+            }
+            visual={<Way2HomeVisual />}
+          />
+
+          <ProjectCard
+            href="https://github.com/Rashid-hussain-mohammed/ml_eng_A3C"
+            title="Vehicle powertrain optimization"
+            stack="A3C reinforcement learning · TensorFlow · Team of 3"
+            description={
+              <p>
+                Led implementation on a 3-person team for &quot;Machine
+                Learning in Engineering Applications&quot;: an Asynchronous
+                Advantage Actor-Critic (A3C) agent tuning engine
+                displacement, compression ratio, and three gear ratios
+                against an external simulator, with parallel worker threads
+                training a shared global network. Gear-ratio ordering (G3
+                &gt; G4 &gt; G5) is enforced in the action space, and the
+                reward balances elasticity against fuel consumption. Final
+                solutions clustered near parameter boundaries — flagged for
+                reward-shaping refinement.
+              </p>
+            }
+            visual={<PowertrainVisual />}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RagVisual() {
+  const stages = ["Query", "Retrieve", "Judge", "Rewrite", "Generate"];
+  return (
+    <div className="border-2 border-ink bg-paper p-6">
+      <div className="flex flex-wrap items-center gap-2">
+        {stages.map((stage, i) => (
+          <div key={stage} className="flex items-center gap-2">
+            <div className="border-2 border-ink bg-paper-raised px-3 py-2 font-data text-xs text-ink">
+              {stage}
+            </div>
+            {i < stages.length - 1 && (
+              <span className="text-ink/40" aria-hidden>
+                &rarr;
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 font-data text-[11px] text-muted">
+        Judge fails &rarr; rewrite query &rarr; retry (bounded)
+      </p>
+      <div className="mt-5 border-t-2 border-line pt-4">
+        <span className="font-display text-4xl font-bold text-signal">
+          88%
+        </span>
+        <p className="mt-1 font-body text-xs text-muted">
+          pass rate on a 25-question adversarial stress test against real
+          financial filings
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function Way2HomeVisual() {
+  return (
+    <div className="relative">
+      <div className="border-2 border-ink bg-paper-raised p-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/way2home/home.png"
+          alt="Way2Home homepage: search filters and a list of studio apartment listings"
+          width={1346}
+          height={1156}
+          className="w-full border border-line/60"
+        />
+      </div>
+      <div className="absolute -bottom-6 -left-6 hidden w-2/5 border-2 border-ink bg-paper-raised p-1.5 shadow-[4px_4px_0_var(--ink)] sm:block">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/way2home/favorites.png"
+          alt="Way2Home favorites page with saved listings and site navigation"
+          width={1337}
+          height={1145}
+          className="w-full border border-line/60"
+        />
+      </div>
+    </div>
+  );
+}
+
+function PowertrainVisual() {
+  return (
+    <div className="border-2 border-ink bg-paper p-6">
+      <svg
+        viewBox="0 0 240 120"
+        className="h-auto w-full"
+        role="img"
+        aria-label="Chart of reward converging from a volatile 800 to 1300 range to a stable plateau near 3500 across training episodes"
+      >
+        <line x1="10" y1="105" x2="230" y2="105" style={{ stroke: "#efede6" }} strokeWidth="1.5" />
+        <line x1="10" y1="10" x2="10" y2="105" style={{ stroke: "#efede6" }} strokeWidth="1.5" />
+        <path
+          d="M10,90 L25,60 L40,95 L55,50 L70,80 C 110,55 150,30 230,20"
+          fill="none"
+          style={{ stroke: "#c6ff3d" }}
+          strokeWidth="2.5"
+        />
+        <text x="14" y="103" fontSize="9" style={{ fill: "#a6a29a" }} className="font-data">800</text>
+        <text x="14" y="22" fontSize="9" style={{ fill: "#a6a29a" }} className="font-data">3500</text>
+      </svg>
+      <p className="mt-2 font-data text-[11px] text-muted">
+        Reward: volatile 800–1300 early &rarr; stable ~3500 plateau (500+
+        episodes)
+      </p>
+    </div>
+  );
+}
