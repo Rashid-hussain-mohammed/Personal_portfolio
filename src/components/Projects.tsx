@@ -106,16 +106,13 @@ export default function Projects() {
             stack="A3C reinforcement learning · TensorFlow · Team of 3"
             description={
               <p>
-                Led implementation on a 3-person team for &quot;Machine
-                Learning in Engineering Applications&quot;: an Asynchronous
-                Advantage Actor-Critic (A3C) agent tuning engine
-                displacement, compression ratio, and three gear ratios
-                against an external simulator, with parallel worker threads
-                training a shared global network. Gear-ratio ordering (G3
-                &gt; G4 &gt; G5) is enforced in the action space, and the
-                reward balances elasticity against fuel consumption. Final
-                solutions clustered near parameter boundaries — flagged for
-                reward-shaping refinement.
+                Led implementation on a 3-person team for "Machine Learning in Engineering
+                Applications": an Asynchronous Advantage Actor-Critic (A3C) agent tuning engine
+                displacement, compression ratio, and three gear ratios against an external vehicle
+                simulator, with parallel worker threads training a shared global network. Gear-ratio
+                ordering (G3 > G4 > G5) is enforced in the action space. In a later rebuild, I found
+                and fixed an output-parsing bug that had invalidated the original results, and added a
+                random-search baseline to test whether A3C actually helped.
               </p>
             }
             visual={<PowertrainVisual />}
