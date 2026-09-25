@@ -4,7 +4,7 @@ const LINKS = [
     value: "Rashid.Hussain.Mohammed23@gmail.com",
     href: "mailto:Rashid.Hussain.Mohammed23@gmail.com",
   },
-  { label: "Phone", value: "+49 157 55337939", href: "tel:+4915755337939" },
+  { label: "Phone", value: "+49 xxxxxxxx", href: "tel:+49xxxxxxxx" },
   {
     label: "GitHub",
     value: "github.com/Rashid-hussain-mohammed",
