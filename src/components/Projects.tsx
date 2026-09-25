@@ -106,13 +106,17 @@ export default function Projects() {
             stack="A3C reinforcement learning · TensorFlow · Team of 3"
             description={
               <p>
-                Led implementation on a 3-person team for "Machine Learning in Engineering
-                Applications": an Asynchronous Advantage Actor-Critic (A3C) agent tuning engine
-                displacement, compression ratio, and three gear ratios against an external vehicle
-                simulator, with parallel worker threads training a shared global network. Gear-ratio
-                ordering (G3 > G4 > G5) is enforced in the action space. In a later rebuild, I found
-                and fixed an output-parsing bug that had invalidated the original results, and added a
-                random-search baseline to test whether A3C actually helped.
+                Led implementation on a 3-person team for &quot;Machine
+                Learning in Engineering Applications&quot;: an Asynchronous
+                Advantage Actor-Critic (A3C) agent tuning engine
+                displacement, compression ratio, and three gear ratios
+                against an external vehicle simulator, with parallel worker
+                threads training a shared global network. Gear-ratio
+                ordering (G3 &gt; G4 &gt; G5) is enforced in the action
+                space. In a later rebuild, I found and fixed an
+                output-parsing bug that had invalidated the original
+                results, and added a random-search baseline to test
+                whether A3C actually helped.
               </p>
             }
             visual={<PowertrainVisual />}
@@ -185,29 +189,40 @@ function Way2HomeVisual() {
 }
 
 function PowertrainVisual() {
+  const results = [
+    { label: "A3C", value: "995.25", width: "100%", color: "#c6ff3d" },
+    { label: "Random search", value: "773.62", width: "78%", color: "#a6a29a" },
+  ];
   return (
     <div className="border-2 border-ink bg-paper p-6">
-      <svg
-        viewBox="0 0 240 120"
-        className="h-auto w-full"
-        role="img"
-        aria-label="Chart of reward converging from a volatile 800 to 1300 range to a stable plateau near 3500 across training episodes"
-      >
-        <line x1="10" y1="105" x2="230" y2="105" style={{ stroke: "#efede6" }} strokeWidth="1.5" />
-        <line x1="10" y1="10" x2="10" y2="105" style={{ stroke: "#efede6" }} strokeWidth="1.5" />
-        <path
-          d="M10,90 L25,60 L40,95 L55,50 L70,80 C 110,55 150,30 230,20"
-          fill="none"
-          style={{ stroke: "#c6ff3d" }}
-          strokeWidth="2.5"
-        />
-        <text x="14" y="103" fontSize="9" style={{ fill: "#a6a29a" }} className="font-data">800</text>
-        <text x="14" y="22" fontSize="9" style={{ fill: "#a6a29a" }} className="font-data">3500</text>
-      </svg>
-      <p className="mt-2 font-data text-[11px] text-muted">
-        Reward: volatile 800–1300 early &rarr; stable ~3500 plateau (500+
-        episodes)
+      <p className="font-data text-[11px] text-muted">
+        Best reward · equal evaluation budget
       </p>
+      <div className="mt-4 space-y-3">
+        {results.map((r) => (
+          <div key={r.label}>
+            <div className="flex items-baseline justify-between font-data text-xs text-ink">
+              <span>{r.label}</span>
+              <span>{r.value}</span>
+            </div>
+            <div className="mt-1 h-3 border-2 border-ink bg-paper-raised">
+              <div
+                className="h-full"
+                style={{ width: r.width, background: r.color }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-5 border-t-2 border-line pt-4">
+        <span className="font-display text-4xl font-bold text-signal">
+          +29%
+        </span>
+        <p className="mt-1 font-body text-xs text-muted">
+          higher best reward than a random-search baseline, measured after
+          fixing an output-parsing bug in the original results
+        </p>
+      </div>
     </div>
   );
 }
