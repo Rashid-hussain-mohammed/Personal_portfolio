@@ -4,7 +4,6 @@ const LINKS = [
     value: "Rashid.Hussain.Mohammed23@gmail.com",
     href: "mailto:Rashid.Hussain.Mohammed23@gmail.com",
   },
-  { label: "Phone", value: "+49 xxxxxxxx", href: "tel:+49xxxxxxxx" },
   {
     label: "GitHub",
     value: "github.com/Rashid-hussain-mohammed",
@@ -48,7 +47,7 @@ export default function Contact() {
         </div>
 
         <p className="mt-16 font-data text-xs text-muted">
-          Built with Next.js, containerized with Docker.
+          Built with Next.js · deployed on Vercel · Docker-ready
         </p>
       </div>
     </footer>
